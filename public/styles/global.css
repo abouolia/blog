@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+
+
+  .shadow_line {
+    box-shadow: inset 0 -1px 0 0 currentColor;
+  }
+
+  .link-btn {
+    height: max-content;
+    @apply px-1 font-light transition-colors duration-150 ease-linear rounded-sm bg-unhovered hover:bg-hovered dark:hover:bg-hovered-dark dark:hover:text-white dark:bg-unhovered-dark;
+  }
+
+  .link-tag {
+    height: max-content;
+    @apply px-1 font-light transition-colors duration-150 ease-linear rounded-sm bg-unhovered-tag focus:bg-hovered-tag hover:bg-hovered-tag active:bg-hovered-tag dark:active:bg-hovered-tag dark:hover:bg-hovered-tag-dark dark:focus:bg-hovered-tag-dark dark:bg-unhovered-tag-dark dark:hover:text-white;
+  }
+
+  .link-tag-selected {
+    height: max-content;
+    @apply px-1 font-light transition-colors duration-150 ease-linear rounded-sm bg-hovered-tag focus:bg-unhovered-tag hover:bg-unhovered-tag  dark:active:bg-unhovered-tag dark:focus:bg-unhovered-tag dark:active:bg-unhovered-tag dark:bg-hovered-tag-dark dark:hover:text-white;
+  }
+
+  .button {
+    @apply p-2 border-2 border-warmGray-200 dark:border-warmGray-500;
+  }
+
+  .link {
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 180%;
+    animation: gradient 8s ease infinite;
+    @apply bg-iridescent;
+  }
+
+ 
+  h2 {
+    @apply text-xl;
+  }
+  
+}
+
+article .anchor {
+  padding-left: 0.5rem;
+  opacity: 0;
+  transition: opacity 300ms ease-in-out;
+}
+
+article :is(h2, h3, h4, h4, h6):hover .anchor {
+  opacity: 0.6;
+}
+
+details {
+  padding: 1rem;
+  border: 2px solid #F2CFC2;
+}
