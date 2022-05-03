@@ -6,7 +6,7 @@ import { getPostBySlug, getAllPosts } from '../../utils/posts';
 import { MDXContent, SingularPost } from '../../components';
 import { config } from '../../config';
 
-export default function Post({ post, source, morePosts, preview }) {
+export default function Post({ post, source }) {
   const router = useRouter();
 
   // Display not found error if the post not found.
@@ -45,7 +45,7 @@ export async function getStaticPaths() {
     paths: posts.map((post) => {
       return {
         params: {
-          slug: post.slug,
+          slug: post?.slug || '',
         },
       };
     }),

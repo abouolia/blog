@@ -1,12 +1,14 @@
 import Head from 'next/head';
 import { serialize } from 'next-mdx-remote/serialize';
-import { MDXRemote } from 'next-mdx-remote';
 import tw from 'twin.macro';
 import { config } from '../config';
 import { getHomePage } from '../utils/posts';
 import { MDXContent } from '../components';
-const components = {};
 
+/**
+ * Index page.
+ * @returns {JSX.Element}
+ */
 export default function Index({ source }) {
   return (
     <div>
@@ -21,7 +23,7 @@ export default function Index({ source }) {
   );
 }
 
-export async function getStaticProps({ params }) {
+export async function getStaticProps() {
   const post = getHomePage(['title', 'date', 'slug', 'content']);
   const source = await serialize(post?.content || '');
 

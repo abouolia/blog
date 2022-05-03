@@ -37,20 +37,8 @@ export const defaultProperties = {
 
 let REACT_TOGGLE_DARK_MODE_GLOBAL_ID = 0;
 
-type SVGProps = Omit<React.HTMLAttributes<HTMLOrSVGElement>, 'onChange'>;
-interface Props extends SVGProps {
-  onChange: (checked: boolean) => void;
-  checked: boolean;
-  style?: React.CSSProperties;
-  size?: number;
-  animationProperties?: typeof defaultProperties;
-  moonColor?: string;
-  sunColor?: string;
-}
-
 export function DarkModeSwitch({
   onChange,
-  children,
   checked = false,
   size = 24,
   animationProperties = defaultProperties,
@@ -120,7 +108,6 @@ export function DarkModeSwitch({
       <mask id={uniqueMaskId}>
         <rect x="0" y="0" width="100%" height="100%" fill="white" />
         <animated.circle
-          // @ts-ignore
           style={maskedCircleProps}
           r="9"
           fill="black"
@@ -131,7 +118,6 @@ export function DarkModeSwitch({
         cx="12"
         cy="12"
         fill={checked ? moonColor : sunColor}
-        // @ts-ignore
         style={centerCircleProps}
         mask={`url(#${uniqueMaskId})`}
       />

@@ -7,7 +7,7 @@ export function PostsList({ children }) {
   return <PostsListRoot>{children}</PostsListRoot>;
 }
 
-export function Post({ title, date, slug, tags }) {
+export function Post({ title, date, slug }) {
   return (
     <PostRoot>
       <PostLink slug={slug}>

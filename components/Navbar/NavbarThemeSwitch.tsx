@@ -5,7 +5,6 @@ import { DarkModeSwitch } from './test';
 type ColorTheme = 'light' | 'dark';
 
 export function NavbarThemeSwitch() {
-  const COLOR_THEME = 'theme';
   const [theme, setTheme] = useState<ColorTheme>('dark');
 
   useEffect(() => {
@@ -38,6 +37,7 @@ export function NavbarThemeSwitch() {
         onChange={switchTheme}
         moonColor="white"
         sunColor="black"
+        style={{}}
       />
     </div>
   );

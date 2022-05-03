@@ -2,7 +2,7 @@ import React from 'react';
 import { MDXRemote } from 'next-mdx-remote';
 import Link from 'next/link';
 import tw from 'twin.macro';
-import Image from 'next/image';
+import Image, { ImageProps } from 'next/image';
 import { LinkButton } from './Button';
 
 const H2 = tw.h3`mb-3 mt-3 text-3xl font-black capitalize md:text-3xl`;
@@ -29,9 +29,10 @@ const A = ({ href = '', ...props }) => {
     </Link>
   );
 };
-const Img = ({ children, ...props }: { children: React.ReactNode }) => (
+
+const Img = ({ ...props }: ImageProps) => (
   <ImgWrap>
-    <Image alt="" {...(props as any)} layout="fill" />
+    <Image alt="" {...props} layout="fill" />
   </ImgWrap>
 );
 
@@ -49,6 +50,12 @@ const predefinedComponents = {
  * MDX content.
  * @returns {JSX.Element}
  */
-export function MDXContent({ components = {}, ...rest }) {
-  return <MDXRemote compiledSource={''} {...rest} components={predefinedComponents} />;
+export function MDXContent({ ...rest }) {
+  return (
+    <MDXRemote
+      compiledSource={''}
+      {...rest}
+      components={predefinedComponents}
+    />
+  );
 }
