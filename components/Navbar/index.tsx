@@ -4,8 +4,6 @@ import { config } from '../../config';
 import { NavbarRssIcon } from './NavbarRSSIcon';
 import { getCurrentTimeFormat } from '../../utils/formatDate';
 import { NavbarThemeSwitch } from './NavbarThemeSwitch';
-// import { NavbarThemeSwitch } from './NavbarThemeSwitch';
-// import { NavbarDocSearch } from './NavbarDocSearch';
 
 /**
  * Navbar.
@@ -33,7 +31,6 @@ export function Navbar() {
             ))}
             <NavbarRssIcon />
             <NavbarThemeSwitch />
-            {/* <NavbarDocSearch /> */}
           </NavRightSide>
         </NavHeaderNav>
       </NavHeaderInner>
