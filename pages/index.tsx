@@ -4,7 +4,7 @@ import { MDXRemote } from 'next-mdx-remote';
 import tw from 'twin.macro';
 import { config } from '../config';
 import { getHomePage } from '../utils/posts';
-
+import { MDXContent } from '../components';
 const components = {};
 
 export default function Index({ source }) {
@@ -15,7 +15,7 @@ export default function Index({ source }) {
       </Head>
 
       <HomepageRoot>
-        <MDXRemote {...source} components={components} />
+        <MDXContent {...source} />
       </HomepageRoot>
     </div>
   );
@@ -40,6 +40,4 @@ const HomepageRoot = tw.div`
   py-16
   flex
   flex-col
-  justify-center
-  items-center
 `;
