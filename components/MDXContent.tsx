@@ -50,5 +50,5 @@ const predefinedComponents = {
  * @returns {JSX.Element}
  */
 export function MDXContent({ components = {}, ...rest }) {
-  return <MDXRemote {...rest} components={predefinedComponents} />;
+  return <MDXRemote compiledSource={''} {...rest} components={predefinedComponents} />;
 }
