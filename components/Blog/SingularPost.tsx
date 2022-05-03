@@ -12,8 +12,8 @@ export function SingularPost({ title, content }: ISinglePostProps) {
       <SingularPostHeader>
         <SingularPostTitle>{title}</SingularPostTitle>
         <SingularPostDate>
-          <time datetime="2022-04-21">Published on 21 April, 2022</time>
-          <time datetime="2022-04-21">Published on 21 April, 2022</time>
+          <time dateTime="2022-04-21">Published on 21 April, 2022</time>
+          <time dateTime="2022-04-21">Published on 21 April, 2022</time>
         </SingularPostDate>
       </SingularPostHeader>
 
