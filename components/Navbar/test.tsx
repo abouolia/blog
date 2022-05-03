@@ -108,6 +108,7 @@ export function DarkModeSwitch({
       <mask id={uniqueMaskId}>
         <rect x="0" y="0" width="100%" height="100%" fill="white" />
         <animated.circle
+          // @ts-ignore
           style={maskedCircleProps}
           r="9"
           fill="black"
@@ -118,6 +119,7 @@ export function DarkModeSwitch({
         cx="12"
         cy="12"
         fill={checked ? moonColor : sunColor}
+        // @ts-ignore
         style={centerCircleProps}
         mask={`url(#${uniqueMaskId})`}
       />

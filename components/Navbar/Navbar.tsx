@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import tw from 'twin.macro';
 import { config } from '../../config';
-import { NavbarRssIcon } from './NavbarRSSIcon';
+import { NavbarRssIcon } from './NavbarRssIcon';
 import { getCurrentTimeFormat } from '../../utils/formatDate';
 import { NavbarThemeSwitch } from './NavbarThemeSwitch';
 

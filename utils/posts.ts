@@ -8,7 +8,18 @@ export function getPostSlugs() {
   return fs.readdirSync(postsDirectory);
 }
 
-export function getPostBySlug(slug, fields = []) {
+interface PostContentMeta {
+  slug?: string;
+  content?: string;
+  date?: Date;
+  title?: string;
+}
+interface HomepageContentMeta {
+  slug?: string;
+  content?: string;
+}
+
+export function getPostBySlug(slug, fields = []): PostContentMeta {
   const realSlug = slug.replace(/\.mdx$/, '');
   const fullPath = join(postsDirectory, `${realSlug}.mdx`);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
@@ -24,7 +35,6 @@ export function getPostBySlug(slug, fields = []) {
     if (field === 'content') {
       items[field] = content;
     }
-
     if (typeof data[field] !== 'undefined') {
       items[field] = data[field];
     }
@@ -32,7 +42,7 @@ export function getPostBySlug(slug, fields = []) {
   return items;
 }
 
-export function getAllPosts(fields = []) {
+export function getAllPosts(fields = []): PostContentMeta[] {
   const slugs = getPostSlugs();
 
   const posts = slugs
@@ -43,7 +53,7 @@ export function getAllPosts(fields = []) {
   return posts;
 }
 
-export function getHomePage(fields) {
+export function getHomePage(fields): HomepageContentMeta {
   const fullPath = join('content/', `home.mdx`);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
   const { data, content } = matter(fileContents);
@@ -56,7 +66,6 @@ export function getHomePage(fields) {
     if (field === 'content') {
       items[field] = content;
     }
-
     if (typeof data[field] !== 'undefined') {
       items[field] = data[field];
     }
