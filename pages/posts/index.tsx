@@ -8,7 +8,7 @@ function BlogPosts({ posts }) {
     <Post
       key={post.slug}
       title={post.title}
-      date={post.date}
+      date={post.publishedAt}
       slug={post.slug}
     />
   ));
@@ -30,11 +30,8 @@ export default function Index({ allPosts }) {
 export async function getStaticProps() {
   const allPosts = getAllPosts([
     'title',
-    'date',
     'slug',
-    'author',
-    'coverImage',
-    'excerpt',
+    'publishedAt'
   ]);
 
   return {

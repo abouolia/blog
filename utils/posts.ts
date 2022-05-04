@@ -11,7 +11,8 @@ export function getPostSlugs() {
 interface PostContentMeta {
   slug?: string;
   content?: string;
-  date?: Date;
+  publishedAt?: Date;
+  updatedAt?: Date;
   title?: string;
 }
 interface HomepageContentMeta {
@@ -48,7 +49,7 @@ export function getAllPosts(fields = []): PostContentMeta[] {
   const posts = slugs
     .map((slug) => getPostBySlug(slug, fields))
     // Sort posts by date in descending order
-    .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
+    .sort((post1, post2) => (post1.publishedAt > post2.publishedAt ? -1 : 1));
 
   return posts;
 }

@@ -1,19 +1,35 @@
 import React from 'react';
 import tw from 'twin.macro';
+import { formateDateFull } from '../../utils/formatDate';
 
 interface ISinglePostProps {
   title: string;
   content: string | JSX.Element;
+  publishedAt: string;
+  updatedAt?: string;
 }
 
-export function SingularPost({ title, content }: ISinglePostProps) {
+export function SingularPost({
+  title,
+  content,
+  publishedAt,
+  updatedAt,
+}: ISinglePostProps) {
   return (
     <SingularPostRoot>
       <SingularPostHeader>
         <SingularPostTitle>{title}</SingularPostTitle>
         <SingularPostDate>
-          <time dateTime="2022-04-21">Published on 21 April, 2022</time>
-          <time dateTime="2022-04-21">Published on 21 April, 2022</time>
+          {publishedAt && (
+            <time dateTime="2022-04-21">
+              Published on {formateDateFull(publishedAt)}
+            </time>
+          )}
+          {updatedAt && (
+            <time dateTime="2022-04-21">
+              Published on {formateDateFull(updatedAt)}
+            </time>
+          )}
         </SingularPostDate>
       </SingularPostHeader>
 

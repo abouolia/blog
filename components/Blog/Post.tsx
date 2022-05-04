@@ -3,6 +3,7 @@ import tw, { styled } from 'twin.macro';
 import Link from 'next/link';
 import { ArticleRoot } from './ArticleRoot';
 import { HighlightText } from '../Button';
+import { formateDatePreview } from '../../utils/formatDate';
 
 /**
  * Posts list container.
@@ -14,7 +15,7 @@ export function PostsList({ children }) {
 
 interface PostProps {
   title: string;
-  date: Date;
+  date: string;
   slug: string;
 }
 /**
@@ -27,7 +28,7 @@ export function Post({ title, date, slug }: PostProps) {
     <PostRoot>
       <PostLink slug={slug}>
         <PostEntry>
-          <PostDate>{date}</PostDate>
+          <PostDate>{formateDatePreview(date)}</PostDate>
           <PostTitle>{title}</PostTitle>
         </PostEntry>
       </PostLink>

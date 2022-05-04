@@ -20,13 +20,23 @@ export default function Post({ post, source }) {
           {post.title} | {config.siteTitle}
         </title>
       </Head>
-      <SingularPost title={post.title} content={<MDXContent {...source} />} />
+      <SingularPost
+        title={post.title}
+        publishedAt={post.publishedAt}
+        content={<MDXContent {...source} />}
+      />
     </>
   );
 }
 
 export async function getStaticProps({ params }) {
-  const post = getPostBySlug(params.slug, ['title', 'date', 'slug', 'content']);
+  const post = getPostBySlug(params.slug, [
+    'title',
+    'publishedAt',
+    'updatedAt',
+    'slug',
+    'content',
+  ]);
   const source = await serialize(post?.content || '');
 
   return {
