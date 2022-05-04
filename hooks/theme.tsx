@@ -12,7 +12,7 @@ export function useSyncThemeBodyClassname(theme: ColorTheme) {
   useEffect(() => {
     const bodyClass = document.body.classList;
 
-    if (theme === 'dark') {
+    if (theme === 'light') {
       bodyClass.add('light');
       bodyClass.remove('dark');
     } else {

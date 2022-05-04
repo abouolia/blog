@@ -1,4 +1,5 @@
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
+import tw from 'twin.macro';
 import { DarkModeSwitch } from './test';
 import {
   useGetTheme,
@@ -22,19 +23,23 @@ export function NavbarThemeSwitch() {
   useSyncThemeLocalStorage(theme);
 
   // Handle the switch theme button click.
-  const handleSwitchTheme = useCallback(() => {
+  const handleSwitchTheme = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark');
-  }, [theme, setTheme]);
+  };
+
+  const isChecked = !!(theme === 'dark');
 
   return (
-    <div className="flex items-center w-5 h-5 bg-transparent">
+    <NavbarThemeSwitchRoot>
       <DarkModeSwitch
-        checked={theme === 'dark'}
+        checked={isChecked}
         onChange={handleSwitchTheme}
         moonColor="white"
         sunColor="black"
         style={{}}
       />
-    </div>
+    </NavbarThemeSwitchRoot>
   );
 }
+
+const NavbarThemeSwitchRoot = tw.div`flex items-center w-5 h-5 bg-transparent`;
