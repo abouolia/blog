@@ -1,40 +1,36 @@
-import { useEffect, useState } from 'react';
+import { useState, useCallback } from 'react';
 import { DarkModeSwitch } from './test';
-// import { setLocalStorage } from '../../utils/localStorage';
+import {
+  useGetTheme,
+  useSyncThemeBodyClassname,
+  useSyncThemeLocalStorage,
+  ColorTheme,
+} from '../../hooks/theme';
 
-type ColorTheme = 'light' | 'dark';
-
+/**
+ * Navbar theme switch.
+ * @returns {JSX.Element}
+ */
 export function NavbarThemeSwitch() {
-  const [theme, setTheme] = useState<ColorTheme>('dark');
+  const currentTheme = useGetTheme();
+  const [theme, setTheme] = useState<ColorTheme>(currentTheme);
 
-  useEffect(() => {
-    const theme = (document.body.getAttribute('class') as ColorTheme) || 'dark';
-    setTheme(theme);
-  }, []);
+  // Sync the theme with the document body classname.
+  useSyncThemeBodyClassname(theme);
 
-  const switchTheme = () => {
-    const bodyClass = document.body.classList;
+  // Syncs the theme with the document local storage.
+  useSyncThemeLocalStorage(theme);
 
-    if (theme === 'dark') {
-      setTheme('light');
-      // setLocalStorage(COLOR_THEME, 'light');
-
-      bodyClass.add('light');
-      bodyClass.remove('dark');
-    } else {
-      setTheme('dark');
-      // setLocalStorage(COLOR_THEME, 'dark');
-
-      bodyClass.add('dark');
-      bodyClass.remove('light');
-    }
-  };
+  // Handle the switch theme button click.
+  const handleSwitchTheme = useCallback(() => {
+    setTheme(theme === 'dark' ? 'light' : 'dark');
+  }, [theme, setTheme]);
 
   return (
     <div className="flex items-center w-5 h-5 bg-transparent">
       <DarkModeSwitch
         checked={theme === 'dark'}
-        onChange={switchTheme}
+        onChange={handleSwitchTheme}
         moonColor="white"
         sunColor="black"
         style={{}}
