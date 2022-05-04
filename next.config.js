@@ -14,4 +14,7 @@ module.exports = withMDX({
   experimental: {
     runtime: 'nodejs',
   },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
 });
