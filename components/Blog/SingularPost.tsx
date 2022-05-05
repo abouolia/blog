@@ -1,6 +1,7 @@
 import React from 'react';
 import tw from 'twin.macro';
 import { formateDateFull } from '../../utils/formatDate';
+import { ArticleRoot } from './ArticleRoot';
 
 interface ISinglePostProps {
   title: string;
@@ -38,7 +39,7 @@ export function SingularPost({
   );
 }
 
-const SingularPostRoot = tw.article`
+const SingularPostRoot = tw(ArticleRoot)`
   max-w-[85ch]
   mx-auto
   pt-12

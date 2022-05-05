@@ -4,6 +4,7 @@ import tw from 'twin.macro';
 import { config } from '../config';
 import { getHomePage } from '../utils/posts';
 import { MDXContent } from '../components';
+import { ArticleRoot } from '../components/Blog/ArticleRoot';
 
 /**
  * Index page.
@@ -34,7 +35,7 @@ export async function getStaticProps() {
   };
 }
 
-const HomepageRoot = tw.div`
+const HomepageRoot = tw(ArticleRoot)`
   w-full
   sm:max-w-[75ch]
   m-auto
