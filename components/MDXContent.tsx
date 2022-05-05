@@ -12,9 +12,8 @@ const Spacer = tw.div`h-4`;
 const A = ({ href = '', ...props }) => {
   if (href.match(/http|https/)) {
     return (
-      <a
+      <LinkButton
         href={href}
-        className="link-btn"
         target="_blank"
         rel="noopener noreferrer"
         {...props}

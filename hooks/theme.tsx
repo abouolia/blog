@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { setLocalStorage, getLocalStorage } from '../utils/localStorage';
 
 export type ColorTheme = 'light' | 'dark';
