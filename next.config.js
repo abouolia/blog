@@ -1,3 +1,4 @@
+const withTwin = require('./withTwin.js')
 const withMDX = require('@next/mdx')({
   extension: /\.mdx?$/,
 
@@ -8,7 +9,17 @@ const withMDX = require('@next/mdx')({
     // providerImportSource: "@mdx-js/react",
   },
 });
-module.exports = withMDX({
+
+
+
+/**
+ * @type {import('next').NextConfig}
+ */
+// module.exports = withTwin({
+  
+// })
+module.exports = withTwin(withMDX({
+  reactStrictMode: true, // < Recommended by Next
   // Append the default value with md extensions
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
   experimental: {
@@ -17,4 +28,4 @@ module.exports = withMDX({
   typescript: {
     ignoreBuildErrors: true,
   },
-});
+}));

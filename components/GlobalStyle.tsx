@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
-import tw, { GlobalStyles as BaseStyles } from 'twin.macro';
+import tw, { GlobalStyles as BaseStyles, theme } from 'twin.macro';
 
 const CustomStyles = createGlobalStyle`
   body.light {
@@ -29,7 +29,6 @@ const CustomStyles = createGlobalStyle`
     --syntax-html-tag: hsl(0, 0%, 32%);
     --syntax-boolean: hsl(60, 0%, 20%);
   }
-
   body.dark {
     --theme: 'dark';
     --color-text: #dadfe7;
@@ -59,7 +58,6 @@ const CustomStyles = createGlobalStyle`
     --docsearch-muted-color: #939fb4;
     --docsearch-text-color: #d3dae6;
   }
-
   html,
   body,
   #__next {
@@ -67,20 +65,10 @@ const CustomStyles = createGlobalStyle`
     --sc-width: 6px;
     scroll-behavior: smooth;
   }
-
   html {
-    font: 100%/1.75;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New,
-      monospace;
     font-stretch: 25% 150%;
-  }
-
-  @supports (font-variation-settings: normal) {
-    html {
-      font: 100%/1.75 'iA Quattro', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-        Liberation Mono, Courier New, monospace;
-      font-stretch: 25% 150%;
-    }
+    line-height: 1.7;
+    -webkit-font-smoothing: auto;
   }
   * {
     scrollbar-color: var(--sc-divider-light) var(--sc-bg);
@@ -111,7 +99,6 @@ const CustomStyles = createGlobalStyle`
   *::selection {
     ${tw`bg-unhovered text-warmGray-800`}
   }
-
 `;
 
 /**

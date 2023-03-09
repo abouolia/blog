@@ -2,7 +2,6 @@ import tw from 'twin.macro';
 import Head from 'next/head';
 
 import '../public/styles/font.css';
-import '../public/styles/prism.css';
 
 import { GlobalStyles, Navbar } from '../components';
 
