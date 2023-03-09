@@ -4,6 +4,5 @@ export const config = {
     { route: '/posts', title: 'Posts' },
     { route: '/notes', title: 'Notes' },
   ],
-  navbarAvatar:
-    'https://pbs.twimg.com/profile_images/1425844102684360705/lsfPY_xM_400x400.jpg',
+  navbarAvatar: '/images/avatar.png',
 };
