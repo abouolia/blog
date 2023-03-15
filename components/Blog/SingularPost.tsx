@@ -65,4 +65,5 @@ const SingularPostDate = tw.div`
   uppercase
   text-warmGray-500
   dark:text-warmGray-400
+  tracking-widest
 `;

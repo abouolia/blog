@@ -2,6 +2,7 @@ import React from 'react';
 import { MDXRemote } from 'next-mdx-remote';
 import Link from 'next/link';
 import tw from 'twin.macro';
+import Gist from "react-gist";
 import { LinkButton } from './Button';
 
 const H2 = tw.h3`mb-3 mt-3 text-3xl font-black capitalize md:text-3xl`;
@@ -27,6 +28,10 @@ const A = ({ href = '', ...props }) => {
   );
 };
 
+const GistCode = ({ id }) => {
+  return <p><Gist id={id} /></p>
+}
+
 const predefinedComponents = {
   a: A,
   h1: H2,
@@ -34,6 +39,7 @@ const predefinedComponents = {
   h3: H3,
   h4: H4,
   Spacer: Spacer,
+  Gist: GistCode,
 };
 
 /**

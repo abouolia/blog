@@ -99,6 +99,14 @@ const CustomStyles = createGlobalStyle`
   *::selection {
     ${tw`bg-unhovered text-warmGray-800`}
   }
+  blockquote p:last-child{
+    margin-bottom: 0;
+  }
+  code, kbd, samp, pre{
+    background: rgba(255, 255, 255, 0.15);
+    padding: 2px 5px;
+    border-radius: 3px;
+  }
 `;
 
 /**

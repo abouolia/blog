@@ -40,6 +40,17 @@ module.exports = {
         'Courier New',
         'monospace',
       ],
+      mono: [
+        'iA Quattro',
+        'ui-monospace',
+        'SFMono-Regular',
+        'Menlo',
+        'Monaco',
+        'Consolas',
+        'Liberation Mono',
+        'Courier New',
+        'monospace',
+      ],
     },
     extend: {
       colors: {

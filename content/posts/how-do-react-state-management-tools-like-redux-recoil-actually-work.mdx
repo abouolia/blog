@@ -1,0 +1,93 @@
+---
+title: 'How Do React State Management Tools Like Redux, Recoil Actually Work?'
+publishedAt: '2020-03-16T05:35:07.322Z'
+---
+
+<img src="https://miro.medium.com/v2/resize:fit:4800/format:webp/1*DqmRsX32NbQjFbmVFnPZSg.jpeg" />
+
+There’s been a question in mind for a long time, what differentiates React **Context API** (the React-backed state management) from other state management tools like Redux or Recoil internally.
+
+<Spacer />
+
+If you take a look at the documentation of these tools you will see something in common, which is these tools are more adequate for an application that has a global state that mutates frequently.
+
+Redux and Recoil for example keep telling their users constantly you might don’t need to use our tool if you have a small application with small amount of components, and their state doesn’t mutate frequently, *here might be the Context API a good fit*.
+
+As you know Context API is not great in terms of performance, for a simple reason, when any state in Provider is mutated all sub-components under the Provider will re-render.
+
+Which makes relying on Context API as state management is absolute harsh cause hurts our application performance. if it was a use case like theme colors as a static state that would be a great use case for Context API.
+
+Every React component re-renders automatically for simple three reasons.
+
+- When the state of the component mutates, even if that state is retrieved from custom hooks like `useQuery()` or `useContext()`.
+- When the properties of the component are mutated.
+- When the parent component re-renders it forces all the children components to re-render, especially if that subcomponent wasn’t wrapped with the `memo` function.
+
+Unnecessary re-renders affect the app performance and cause loss of users’ battery which surely no user would want. Let’s see in detail why components get re-rendered and how to prevent unwanted re-rendering to optimize app components.
+
+> Redux and other state management tools like Recoil tried to build an optimized **Observer system** out of React.
+
+Some tools have different terms and different data structures like Recoil relay on Graph and Set and Redux is more Plain Object oriented with more advanced reducers for complex mutation.
+
+### Observability System
+
+If we look at the Observability system as a big picture, the Observability system is a design pattern, holds state and observers (some called them subscribers) as callbacks and the system notifies these registered observers automatically when the state mutates.
+
+**The Observer design has three main components**: the state or data of the instance, the registered subscribers/observers as stacked callbacks, and a mutator which you can mutate the state, the mutator doesn’t just mutate the state but also tries to notify all registered subscribers/observers when the state is mutated.
+
+It’s quite different from the publish/subscribe system that allows the design to define specific events that you can send custom arguments or different events that contain values that you need to the subscribers.
+
+*We’ll try to implement the Observer System and bind it with React in the next chapter.*
+
+### Building Observability System
+
+Talking theory is great but let’s talk about implementation. As we mentioned before the Observer has three main components: the state, mutator, and subscriber/observer.
+
+Obviously, the subscriber is a callback that receives one property reference (the new state), so the Observer interface should have these basic methods that we need to mutate, subscribe and retrieve our state.
+
+<Gist id="2f9602e43eeab8186bbbd88de7ec60ad" />
+
+The basic flow of the Observer goes like this,
+
+- The `getState()` method just returns our state.
+- The `mutate()` method mutates our state (e.g. the new user is submitted via the input) and then runs `notify()` to notify all registered subscribers callbacks with passing along the new state.
+The `subscriber()` where you can register our subscribers or callback to listen when the state mutated.
+
+I know for sure you’re wondering how to bind that with React to communicate with our React components. We will discuss that in the next chapter and in that chapter.
+
+<Gist id="0d75909fe651da9854325d2981e414bc" />
+
+### Binding Observability System with React
+
+Recoil tried to merge the Observer system and React Binding API in the same library, and other tools like Redux tried to separate the concept Redux as state management and observer in a package and React-redux that bindings Redux to React in a different package.
+
+#### `<ObserverProvider>`
+
+The `ObserverProvider` that provider will flow the observer class instance to all sub-components. And that provider accepts `initialStat` property to inject an initial state to the `Provider` that would be passed to Observer.
+
+<Gist id="1eb1e3755efd16b6eb73a4ea66e29046" />
+
+The observer instance here injected `useRef` to avoid any interactive with React reactive system. `useRef` doesn’t notify the component when its value mutates and that doesn’t cause any re-rendering even if the ref value mutated.
+
+<Gist id="d7c48b994387f135da7cbfee5337b1be" />
+
+
+#### useMutate()
+
+Basically, the mutate hook `useMutate` works as a setter function for our state, retrieved the observer instance from the provider, and used the mutate method to send the new mutated state to the observer.
+
+If you noticed here we wrapped the arrow function with `useCallback` to avoid re-creating a new function every time when the hooked component re-renders.
+
+<Gist id="f86352438f528d0508d723a38555206f" />
+
+#### useSelector()
+
+Obviously the selector hook `useSelector` works as a getter function for our observer but with some differences.
+
+Try to sync the observer state with our React local state inside the hook and that gives the ability to communicate and interact with the hooked React components.
+
+In the first line, we injected the initial state of Observer to React state and then we subscribed to Observer to listen when the state be mutated, and wrapped the subscribe inside `useEffect` to avoid any revoking when the hooked component re-render, eventually retrieving the React state.
+
+<Gist id="eb1cff561d3757dd9103630f115e43bf" />
+
+If you tried to reverse-engineer the most popular React state management tools how they work, you will see their core design centered around that design pattern, some tools have advanced features like reducers to manage mutation complexity in Redux and selector graph dependency in Recoil.

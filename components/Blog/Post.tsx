@@ -57,8 +57,8 @@ const PostEntry = styled.div(() => [
     outline-none
   `,
 ]);
-const PostDate = styled.div(() => [tw`text-sm mr-8 min-w-[50px]`]);
-const PostTitle = styled.h3(() => [...HighlightText()]);
+const PostDate = styled.div(() => [tw`text-sm mr-6 min-w-[60px] opacity-80`]);
+const PostTitle = styled.h3(() => [...HighlightText(), tw`text-lg pl-2 pr-2`]);
 const PostsListRoot = styled.div(() => [
   tw`
   w-full
@@ -67,7 +67,5 @@ const PostsListRoot = styled.div(() => [
   px-5
   py-16
   flex
-  flex-col
-  justify-center
-  items-center`,
+  flex-col`,
 ]);
