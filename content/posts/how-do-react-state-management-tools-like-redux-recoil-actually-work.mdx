@@ -1,9 +1,9 @@
 ---
 title: 'How Do React State Management Tools Like Redux, Recoil Actually Work?'
-publishedAt: '2020-03-16T05:35:07.322Z'
+publishedAt: '2022-05-19T05:35:07.322Z'
 ---
 
-<img src="https://miro.medium.com/v2/resize:fit:4800/format:webp/1*DqmRsX32NbQjFbmVFnPZSg.jpeg" />
+<Picture src="/images/pic-1.webp" width="400px" />
 
 There’s been a question in mind for a long time, what differentiates React **Context API** (the React-backed state management) from other state management tools like Redux or Recoil internally.
 
@@ -53,24 +53,23 @@ The basic flow of the Observer goes like this,
 - The `mutate()` method mutates our state (e.g. the new user is submitted via the input) and then runs `notify()` to notify all registered subscribers callbacks with passing along the new state.
 The `subscriber()` where you can register our subscribers or callback to listen when the state mutated.
 
-I know for sure you’re wondering how to bind that with React to communicate with our React components. We will discuss that in the next chapter and in that chapter.
+I know for sure you’re wondering how to bind that with React to communicate with our React components. *We will discuss that in the next chapter and in that chapter*.
 
 <Gist id="0d75909fe651da9854325d2981e414bc" />
 
 ### Binding Observability System with React
 
-Recoil tried to merge the Observer system and React Binding API in the same library, and other tools like Redux tried to separate the concept Redux as state management and observer in a package and React-redux that bindings Redux to React in a different package.
+Recoil tried to merge the Observer system and React Binding API in the same library, and other tools like Redux tried to separate the concept Redux as state management and observer in a package and [React-redux](https://github.com/reduxjs/react-redux) that bindings Redux to React in a different package.
 
 #### `<ObserverProvider>`
 
-The `ObserverProvider` that provider will flow the observer class instance to all sub-components. And that provider accepts `initialStat` property to inject an initial state to the `Provider` that would be passed to Observer.
+The `ObserverProvider` that provider will flow the observer class instance to all sub-components. And that provider accepts `initialState` property to inject an initial state to the `Provider` that would be passed to Observer.
 
 <Gist id="1eb1e3755efd16b6eb73a4ea66e29046" />
 
 The observer instance here injected `useRef` to avoid any interactive with React reactive system. `useRef` doesn’t notify the component when its value mutates and that doesn’t cause any re-rendering even if the ref value mutated.
 
 <Gist id="d7c48b994387f135da7cbfee5337b1be" />
-
 
 #### useMutate()
 
@@ -90,4 +89,10 @@ In the first line, we injected the initial state of Observer to React state and 
 
 <Gist id="eb1cff561d3757dd9103630f115e43bf" />
 
+<Divider />
+
 If you tried to reverse-engineer the most popular React state management tools how they work, you will see their core design centered around that design pattern, some tools have advanced features like reducers to manage mutation complexity in Redux and selector graph dependency in Recoil.
+
+<Spacer />
+
+[Observer (refactoring.guru)](https://codesandbox.io/s/observer-system-binded-react-eyniy0?file=/src/App.tsx)

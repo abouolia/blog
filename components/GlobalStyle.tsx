@@ -4,7 +4,7 @@ import tw, { GlobalStyles as BaseStyles, theme } from 'twin.macro';
 const CustomStyles = createGlobalStyle`
   body.light {
     --theme: 'light';
-    --color-text: #31302e;
+    --color-text: #000;
     --color-text-secondary: #6d6f88;
     --color-background: #fdfdfd;
     --color-nav-background: transparent;
@@ -103,9 +103,9 @@ const CustomStyles = createGlobalStyle`
     margin-bottom: 0;
   }
   code, kbd, samp, pre{
-    background: rgba(255, 255, 255, 0.15);
     padding: 2px 5px;
     border-radius: 3px;
+    ${tw`bg-[#42828e14] dark:bg-[#2a2e31]`}
   }
 `;
 

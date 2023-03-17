@@ -1,11 +1,11 @@
 ---
 title: 'Controlled & Uncontrolled React Components'
-publishedAt: '2020-03-16T05:35:07.322Z'
+publishedAt: '2022-12-15T05:35:07.322Z'
 ---
 
-<img width="75%" src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*BPqNgvpJ3PyMiokVfGByAQ.png" />
+<Picture src="/images/pic-2.webp" width="400px" />
 
-*Digging deep inside the stateless and stateful React components.*
+_Digging deep inside the stateless and stateful React components._
 
 > If you have been using React some of the time you must have heard about controlled and uncontrolled components.
 
@@ -21,9 +21,9 @@ The controlled component is the component that its main state is controlled from
 
 Technically is the component that takes its current value through props and triggers changes through callbacks like `onChange`.
 
-A parent component “controls” it by handling the callback and managing its own state and passing the new values as props to the controlled component. *You could also call this a “dumb component”*.
+A parent component “controls” it by handling the callback and managing its own state and passing the new values as props to the controlled component. _You could also call this a “dumb component”_.
 
-### Example
+#### Example
 
 Here’s a working code of a controlled component where we have displayed text.
 
@@ -45,7 +45,7 @@ An Uncontrolled Component is one that stores its own state internally.
 
 Usually, that type of component has `initialValue` prop just for passing the initial value of the state in the first rendering, but won’t be able to control the internal stored state in the further mutations.
 
-### Example
+#### Example
 
 Here’s a working code of an uncontrolled component where we have displayed text.
 
@@ -70,14 +70,14 @@ Let’s refactor the component that we already wrote to be controlled and uncont
 
 Let’s review the major aspects of the code.
 
-- If the user passed any value to the value prop the component will convert to be controlled from outside. and that is obviously done by the condition on the `localValue` variable.
-- The `uncontrolledValue` state holds the inner component’s value and that state will be neglected if the user passed a value to the value prop because the component will take `localValue` state from value prop.
+- If the user passed any value to the `value` prop the component will convert to be controlled from outside. and that is obviously done by the condition on the `localValue` variable.
+- The `uncontrolledValue` state holds the inner component’s value and that state will be neglected if the user passed a value to the value prop because the component will take `localValue` state from `value` prop.
 
 ### Refactor the Component to be Reusable Hook
 
-We want to build a custom hook to be more reusable and and that hook should receive 3 main inputs which are the value, `initialValue`, `onChange` we need all these props for any component either controlled or uncontrolled.
+We want to build a custom hook to be more reusable and and that hook should receive 3 main inputs which are the `value`, `initialValue`, `onChange` we need all these props for any component either controlled or uncontrolled.
 
-And the hook should output localValue and onChange, the localValue represents the local state of the component and might be from the value prop (in case controlled) or from the `uncontrolledValue` (in case uncontrolled).
+And the hook should output `localValue` and `onChange`, the localValue represents the local state of the component and might be from the value prop (in case controlled) or from the `uncontrolledValue` (in case uncontrolled).
 
 <Gist id="bbe094efeb67b729a3b9dc12a5139051" />
 
