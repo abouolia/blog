@@ -28,9 +28,13 @@ export const validDate = (d: string): string => {
   return format(date, '{yyyy}-{MM}-{dd}');
 };
 
+/**
+ * Retrieves my current formatted time.
+ * @returns {string}
+ */
 export const getCurrentTimeFormat = () => {
   return new Intl.DateTimeFormat('en-GB', {
-    timeZone: 'Canada/Pacific',
+    timeZone: 'EET',
     hour: 'numeric',
     minute: 'numeric',
     weekday: 'short',
