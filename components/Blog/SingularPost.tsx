@@ -2,10 +2,12 @@ import React from 'react';
 import tw from 'twin.macro';
 import { formateDateFull } from '../../utils/formatDate';
 import { ArticleRoot } from './ArticleRoot';
+import { PostTag, PostTags } from './Tags';
 
 interface ISinglePostProps {
   title: string;
   content: string | JSX.Element;
+  tags?: string[];
   publishedAt: string;
   updatedAt?: string;
 }
@@ -13,6 +15,7 @@ interface ISinglePostProps {
 export function SingularPost({
   title,
   content,
+  tags,
   publishedAt,
   updatedAt,
 }: ISinglePostProps) {
@@ -32,6 +35,14 @@ export function SingularPost({
             </time>
           )}
         </SingularPostDate>
+
+        {tags && (
+          <SingularTags>
+            {tags.map((tag) => (
+              <PostTag>#{tag}</PostTag>
+            ))}
+          </SingularTags>
+        )}
       </SingularPostHeader>
 
       <SingularPostContent>{content}</SingularPostContent>
@@ -46,20 +57,20 @@ const SingularPostRoot = tw(ArticleRoot)`
   pb-28
   px-5
 `;
-const SingularPostHeader = tw.div``;
+const SingularPostHeader = tw.div`pb-8`;
 const SingularPostTitle = tw.h1`
   mb-1
   text-3xl
   font-black
   capitalize
   md:text-4xl
+  
 `;
 const SingularPostContent = tw.div``;
 const SingularPostDate = tw.div`
   flex
   flex-col
   pt-4
-  pb-8
   text-sm
   font-thin
   uppercase
@@ -67,3 +78,4 @@ const SingularPostDate = tw.div`
   dark:text-warmGray-400
   tracking-widest
 `;
+const SingularTags = tw(PostTags)`mt-5`

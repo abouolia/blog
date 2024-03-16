@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import tw from 'twin.macro';
 import { config } from '../../config';
-import { NavbarRssIcon } from './NavbarRssIcon';
 import { getCurrentTimeFormat } from '../../utils/formatDate';
 import { NavbarThemeSwitch } from './NavbarThemeSwitch';
 
@@ -24,12 +23,10 @@ export function Navbar() {
           </NavLeftSide>
 
           <NavRightSide>
-            {config.navbarRoutes.map(({ route, title }) => (
-              <NavHeaderItemLink key={route} href={route}>
-                {title}
-              </NavHeaderItemLink>
-            ))}
-            <NavbarRssIcon />
+            <NavHeaderItemLink href={'/posts'}>Posts</NavHeaderItemLink>
+            <Link href="http://github.com/abouolia" passHref>
+              <GithubLink target={'_blank'}>Github</GithubLink>
+            </Link>
             <NavbarThemeSwitch />
           </NavRightSide>
         </NavHeaderNav>
@@ -108,3 +105,4 @@ const NavTimeRoot = tw.div`
   flex
 `;
 const NavTimeText = tw.span`m-auto`;
+const GithubLink = tw.a`opacity-75`;

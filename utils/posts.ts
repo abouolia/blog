@@ -39,6 +39,9 @@ export function getPostBySlug(slug, fields = []): PostContentMeta {
     if (typeof data[field] !== 'undefined') {
       items[field] = data[field];
     }
+    if (field === 'tags') {
+      items[field] = items[field]?.split(',')?.map(tag => tag.trim());
+    }
   });
   return items;
 }

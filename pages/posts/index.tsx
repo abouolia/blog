@@ -10,6 +10,7 @@ function BlogPosts({ posts }) {
       title={post.title}
       date={post.publishedAt}
       slug={post.slug}
+      tags={post.tags}
     />
   ));
 }
@@ -31,7 +32,8 @@ export async function getStaticProps() {
   const allPosts = getAllPosts([
     'title',
     'slug',
-    'publishedAt'
+    'publishedAt',
+    'tags'
   ]);
 
   return {

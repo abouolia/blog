@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { ArticleRoot } from './ArticleRoot';
 import { HighlightText } from '../Button';
 import { formateDatePreview } from '../../utils/formatDate';
+import { PostTag, PostTags } from './Tags';
 
 /**
  * Posts list container.
@@ -17,21 +18,32 @@ interface PostProps {
   title: string;
   date: string;
   slug: string;
+  tags: string[];
 }
 /**
  * Blog post.
  * @param   {PostProps}
  * @returns {JSX.Element}
  */
-export function Post({ title, date, slug }: PostProps) {
+export function Post({ title, date, slug, tags }: PostProps) {
   return (
     <PostRoot>
-      <PostLink slug={slug}>
-        <PostEntry>
-          <PostDate>{formateDatePreview(date)}</PostDate>
-          <PostTitle>{title}</PostTitle>
-        </PostEntry>
-      </PostLink>
+      <PostEntry>
+        <PostDate>{formateDatePreview(date)}</PostDate>
+
+        <div>
+          <PostLink slug={slug}>
+            <PostTitle>{title}</PostTitle>
+          </PostLink>
+          {tags && (
+            <PostTags>
+              {tags.map((tag) => (
+                <PostTag>#{tag}</PostTag>
+              ))}
+            </PostTags>
+          )}
+        </div>
+      </PostEntry>
     </PostRoot>
   );
 }
@@ -44,7 +56,10 @@ function PostLink({ slug, children }) {
   );
 }
 
-const PostRoot = tw(ArticleRoot)`my-8`;
+const PostRoot = tw(
+  ArticleRoot
+)`py-8 border-b dark:border-white dark:border-opacity-5 border-black border-opacity-5`;
+
 const PostEntry = styled.div(() => [
   tw`
     flex
@@ -57,8 +72,11 @@ const PostEntry = styled.div(() => [
     outline-none
   `,
 ]);
-const PostDate = styled.div(() => [tw`text-sm mr-6 min-w-[60px] opacity-80`]);
-const PostTitle = styled.h3(() => [...HighlightText(), tw`text-lg pl-2 pr-2`]);
+const PostDate = styled.div(() => [tw`text-sm mr-6 min-w-[60px] opacity-90`]);
+const PostTitle = styled.h3(() => [
+  ...HighlightText(),
+  tw`text-[20px] pl-2 pr-2`,
+]);
 const PostsListRoot = styled.div(() => [
   tw`
   w-full

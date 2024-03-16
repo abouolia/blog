@@ -13,6 +13,7 @@ export default function Post({ post, source }) {
   if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />;
   }
+  console.log(post);
   return (
     <>
       <Head>
@@ -24,6 +25,7 @@ export default function Post({ post, source }) {
         title={post.title}
         publishedAt={post.publishedAt}
         content={<MDXContent {...source} />}
+        tags={post.tags}
       />
     </>
   );
@@ -35,6 +37,7 @@ export async function getStaticProps({ params }) {
     'publishedAt',
     'updatedAt',
     'slug',
+    'tags',
     'content',
   ]);
   const source = await serialize(post?.content || '');
