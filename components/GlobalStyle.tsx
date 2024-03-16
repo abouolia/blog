@@ -107,6 +107,9 @@ const CustomStyles = createGlobalStyle`
     border-radius: 3px;
     ${tw`bg-[#42828e14] dark:bg-[#2a2e31]`}
   }
+  h1, h2, h3, h4, h5{
+    ${tw`tracking-wide`}
+  }
 `;
 
 /**
