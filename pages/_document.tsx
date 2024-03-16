@@ -7,6 +7,8 @@ import Document, {
   NextScript,
 } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
+import { getCurrentTheme } from '../hooks/theme';
+import Script from 'next/script';
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
@@ -41,6 +43,13 @@ export default class MyDocument extends Document {
         <Head />
         <body>
           <Main />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `var theme = localStorage.getItem('COLOR_THEME');
+              document.body.classList.add(JSON.parse(theme) === 'light' ? 'light' : 'dark');
+              `,
+            }}
+          />
           <NextScript />
         </body>
       </Html>
