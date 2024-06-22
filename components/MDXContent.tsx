@@ -1,6 +1,6 @@
 import React from 'react';
 import { MDXRemote } from 'next-mdx-remote';
-import Image from 'next/image';
+import Image, { ImageProps } from 'next/image';
 import Link from 'next/link';
 import tw from 'twin.macro';
 import toNumber from 'lodash.tonumber';
@@ -48,6 +48,8 @@ interface PictureProps {
   caption?: string;
   width?: number | string;
   height?: number | string;
+  fullWidth?: boolean;
+  layout?: ImageProps['layout'];
 }
 
 const Picture = ({
@@ -56,9 +58,11 @@ const Picture = ({
   caption,
   width = 775,
   height = 300,
+  fullWidth = true,
+  layout = 'intrinsic'
 }: PictureProps) => {
-  const computedWidth = Math.max(toNumber(width), 775);
-  const computedHeight = Math.max(toNumber(height), 100);
+  const computedWidth = fullWidth ? Math.max(toNumber(width), 775) : width;
+  const computedHeight = fullWidth ? Math.max(toNumber(height), 100) : height;
 
   return (
     <PictureWrap>
@@ -67,7 +71,7 @@ const Picture = ({
         alt={alt}
         width={computedWidth}
         height={computedHeight}
-        layout="intrinsic"
+        layout={layout}
         objectFit="cover"
       />
       {caption && <PictureCaption>{caption}</PictureCaption>}
