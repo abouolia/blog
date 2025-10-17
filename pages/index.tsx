@@ -21,7 +21,7 @@ const activeRepositories = [
   },
   {
     ttile: 'blueprintjs-formik',
-    href: 'https://github.com/abouolia',
+    href: 'https://github.com/bigcapitalhq/blueprintjs-formik',
     description:
       'Binds Blueprint.js components with Formik for easy development.',
   },
