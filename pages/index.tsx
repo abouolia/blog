@@ -14,6 +14,11 @@ const activeRepositories = [
       'Bigcapital is financial accounting with intelligent reporting for faster decision-making, an open-source alternative to Quickbooks, Xero, etc.',
   },
   {
+    ttile: 'noya-media-editor',
+    href: 'https://github.com/noya-app/media-editor',
+    description: 'Noya (YC 23) media editor',
+  },
+  {
     ttile: 'sticky-sidebar',
     href: 'https://github.com/abouolia/sticky-sidebar',
     description:
@@ -29,16 +34,6 @@ const activeRepositories = [
     ttile: 'use-next-context',
     href: 'https://github.com/abouolia/use-next-context',
     description: 'Performance optimized React Context API.',
-  },
-  {
-    ttile: 'noya-prose-editor',
-    href: 'https://github.com/noya-app/prose-theme',
-    description: 'Noya (YC 23) prose editor for content editing and typography styling',
-  },
-  {
-    ttile: 'noya-media-editor',
-    href: 'https://github.com/noya-app/media-editor',
-    description: 'Noya (YC 23) media editor',
   },
   {
     ttile: 'time-progress-bar-extension',
