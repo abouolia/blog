@@ -40,7 +40,7 @@ export async function getStaticProps({ params }) {
     'tags',
     'content',
   ]);
-  const source = await serialize(post?.content || '');
+  const source = await serialize(post?.content || '', { blockJS: false });
 
   return {
     props: {
