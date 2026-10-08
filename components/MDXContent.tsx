@@ -95,12 +95,6 @@ const predefinedComponents = {
  * MDX content.
  * @returns {JSX.Element}
  */
-export function MDXContent({ ...rest }) {
-  return (
-    <MDXRemote
-      compiledSource={''}
-      {...rest}
-      components={predefinedComponents}
-    />
-  );
+export function MDXContent(props: React.ComponentProps<typeof MDXRemote>) {
+  return <MDXRemote {...props} components={predefinedComponents} />;
 }

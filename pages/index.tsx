@@ -98,7 +98,7 @@ export default function Index({ source }) {
 
 export async function getStaticProps() {
   const post = getHomePage(['title', 'date', 'slug', 'content']);
-  const source = await serialize(post.content || '');
+  const source = await serialize(post.content || '', { blockJS: false });
 
   return {
     props: {
