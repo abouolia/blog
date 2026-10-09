@@ -8,7 +8,7 @@ interface TagProps {
 export function PostTags({ children, className }: TagProps) {
   return (
     <div
-      className={`flex text-xs mt-2 gap-2${className ? ` ${className}` : ''}`}
+      className={`flex text-xs flex-wrap mt-2 gap-2${className ? ` ${className}` : ''}`}
     >
       {children}
     </div>
