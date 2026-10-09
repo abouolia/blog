@@ -13,8 +13,8 @@ const activeRepositories = [
   },
   {
     ttile: 'noya-media-editor',
-    href: 'https://github.com/noya-app/media-editor',
-    description: 'Noya (YC 23) media editor',
+    href: 'https://media-editor.netlify.app/',
+    description: 'Noya (YC 23) video editor',
   },
   {
     ttile: 'sticky-sidebar',
