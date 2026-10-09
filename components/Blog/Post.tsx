@@ -1,8 +1,6 @@
 import React from 'react';
-import tw, { styled } from 'twin.macro';
 import Link from 'next/link';
-import { ArticleRoot } from './ArticleRoot';
-import { HighlightText } from '../Button';
+import { highlightText } from '../Button';
 import { formateDatePreview } from '../../utils/formatDate';
 import { PostTag, PostTags } from './Tags';
 
@@ -11,7 +9,11 @@ import { PostTag, PostTags } from './Tags';
  * @returns {JSX.Element}
  */
 export function PostsList({ children }) {
-  return <PostsListRoot>{children}</PostsListRoot>;
+  return (
+    <div className="w-full sm:max-w-[75ch] m-auto px-5 py-16 flex flex-col">
+      {children}
+    </div>
+  );
 }
 
 interface PostProps {
@@ -27,24 +29,28 @@ interface PostProps {
  */
 export function Post({ title, date, slug, tags }: PostProps) {
   return (
-    <PostRoot>
-      <PostEntry>
-        <PostDate>{formateDatePreview(date)}</PostDate>
+    <article className="py-8 border-b dark:border-white dark:border-opacity-5 border-black border-opacity-5">
+      <div className="flex items-center p-1 capitalize transition-colors duration-200 rounded outline-none">
+        <div className="text-sm mr-6 min-w-[60px] opacity-90">
+          {formateDatePreview(date)}
+        </div>
 
         <div>
           <PostLink slug={slug}>
-            <PostTitle>{title}</PostTitle>
+            <h3 className={`${highlightText} text-[20px] pl-2 pr-2`}>
+              {title}
+            </h3>
           </PostLink>
           {tags && (
             <PostTags>
               {tags.map((tag) => (
-                <PostTag>#{tag}</PostTag>
+                <PostTag key={tag}>#{tag}</PostTag>
               ))}
             </PostTags>
           )}
         </div>
-      </PostEntry>
-    </PostRoot>
+      </div>
+    </article>
   );
 }
 
@@ -55,35 +61,3 @@ function PostLink({ slug, children }) {
     </Link>
   );
 }
-
-const PostRoot = tw(
-  ArticleRoot
-)`py-8 border-b dark:border-white dark:border-opacity-5 border-black border-opacity-5`;
-
-const PostEntry = styled.div(() => [
-  tw`
-    flex
-    items-center
-    p-1
-    capitalize
-    transition-colors
-    duration-200
-    rounded
-    outline-none
-  `,
-]);
-const PostDate = styled.div(() => [tw`text-sm mr-6 min-w-[60px] opacity-90`]);
-const PostTitle = styled.h3(() => [
-  ...HighlightText(),
-  tw`text-[20px] pl-2 pr-2`,
-]);
-const PostsListRoot = styled.div(() => [
-  tw`
-  w-full
-  sm:max-w-[75ch]
-  m-auto
-  px-5
-  py-16
-  flex
-  flex-col`,
-]);

@@ -1,9 +1,9 @@
-import tw from 'twin.macro';
 import Head from 'next/head';
 
 import '../public/styles/font.css';
+import '../styles/global.css';
 
-import { GlobalStyles, Navbar } from '../components';
+import { Navbar } from '../components';
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -13,18 +13,14 @@ function MyApp({ Component, pageProps }) {
         <link rel="icon" type="image/x-icon" href="favicon.ico" />
       </Head>
 
-      <GlobalStyles />
-      <AppRoot>
+      <div className="w-full h-full">
         <Navbar />
-        <AppMainRoot>
+        <main className="w-full">
           <Component {...pageProps} />
-        </AppMainRoot>
-      </AppRoot>
+        </main>
+      </div>
     </>
   );
 }
-
-const AppRoot = tw.div`w-full h-full`;
-const AppMainRoot = tw.main`w-full`;
 
 export default MyApp;

@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import tw from 'twin.macro';
 import { config } from '../../config';
 import { getCurrentTimeFormat } from '../../utils/formatDate';
 import { NavbarThemeSwitch } from './NavbarThemeSwitch';
@@ -10,28 +9,32 @@ import { NavbarThemeSwitch } from './NavbarThemeSwitch';
  */
 export function Navbar() {
   return (
-    <NavHeader>
-      <NavHeaderInner>
-        <NavHeaderNav>
-          <NavLeftSide>
+    <div className="relative w-full h-16">
+      <div className="fixed h-20 z-40 w-full flex justify-between backdrop-blur-[20px] backdrop-saturate-150 bg-white/50 dark:bg-[#0D0D1050]">
+        <nav className="w-full sm:max-w-[75ch] m-auto sm:grid md:flex px-5 justify-between items-center">
+          <div>
             <Link href="/" passHref>
-              <NavHeaderSiteLink title="Home" aria-label="Home">
+              <a className="flex" title="Home" aria-label="Home">
                 <NavbarAvatar />
                 <NavbarTime />
-              </NavHeaderSiteLink>
+              </a>
             </Link>
-          </NavLeftSide>
+          </div>
 
-          <NavRightSide>
-            <NavHeaderItemLink href={'/posts'}>Posts</NavHeaderItemLink>
+          <div className="flex items-center gap-6 mt-[5px] md:mt-0">
+            <Link href="/posts" passHref>
+              <a className="capitalize opacity-50">Posts</a>
+            </Link>
             <Link href="http://github.com/abouolia" passHref>
-              <GithubLink target={'_blank'}>Github</GithubLink>
+              <a className="opacity-75" target="_blank" rel="noreferrer">
+                Github
+              </a>
             </Link>
             <NavbarThemeSwitch />
-          </NavRightSide>
-        </NavHeaderNav>
-      </NavHeaderInner>
-    </NavHeader>
+          </div>
+        </nav>
+      </div>
+    </div>
   );
 }
 
@@ -39,70 +42,20 @@ function NavbarTime() {
   const time = getCurrentTimeFormat();
 
   return (
-    <NavTimeRoot>
-      <NavTimeText>{time}, Tripoli, LY</NavTimeText>
-    </NavTimeRoot>
+    <div className="pl-[12px] flex">
+      <span className="m-auto">{time}, Tripoli, LY</span>
+    </div>
   );
 }
 
 function NavbarAvatar() {
   return (
-    <NavAvatarRoot>
-      <NavAvatarImg src={config.navbarAvatar} />
-    </NavAvatarRoot>
+    <div className="flex">
+      <img
+        className="md:h-[40px] md:w-[40px] h-[20px] w-[20px] mt-auto mb-auto rounded-[3px]"
+        src={config.navbarAvatar}
+        alt="avatar"
+      />
+    </div>
   );
 }
-
-const NavHeader = tw.div`relative w-full h-16`;
-const NavHeaderInner = tw.div`
-  fixed
-  h-20
-  z-40
-  w-full
-  flex
-  justify-between
-  backdrop-blur-[20px]
-  backdrop-saturate-150
-  bg-white/50
-  dark:bg-[#0D0D1050]
-`;
-const NavHeaderNav = tw.nav`
-  w-full
-  sm:max-w-[75ch]
-  m-auto
-  sm:grid
-  md:flex
-  px-5
-  justify-between
-  items-center
-`;
-const NavRightSide = tw.div`
-  flex
-  items-center
-  gap-6
-  mt-[5px]
-  md:mt-0
-`;
-const NavHeaderItemLink = tw(Link)`
-  capitalize
-  opacity-50
-`;
-const NavHeaderSiteLink = tw.a`flex`;
-const NavLeftSide = tw.div``;
-
-const NavAvatarRoot = tw.div`flex`;
-const NavAvatarImg = tw.img`
-  md:h-[40px]
-  md:w-[40px]
-  h-[20px]
-  w-[20px]
-  mt-auto
-  mb-auto
-  rounded-[3px]
-`;
-const NavTimeRoot = tw.div`
-  pl-[12px]
-  flex
-`;
-const NavTimeText = tw.span`m-auto`;
-const GithubLink = tw.a`opacity-75`;
