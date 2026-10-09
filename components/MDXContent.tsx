@@ -2,18 +2,40 @@ import React from 'react';
 import { MDXRemote } from 'next-mdx-remote';
 import Image, { ImageProps } from 'next/image';
 import Link from 'next/link';
-import tw from 'twin.macro';
 import toNumber from 'lodash.tonumber';
 import Gist from 'react-gist';
 import { LinkButton } from './Button';
 
-const H2 = tw.h2`mb-4 mt-4 text-2xl font-black capitalize sm:text-3xl`;
-const H3 = tw.h3`mb-4 mt-4 text-2xl font-black capitalize sm:text-2xl`;
-const H4 = tw.h4`mb-3 mt-3 text-xl font-black capitalize sm:text-2xl`;
-const Divider = tw.div`h-px bg-white mx-4 my-4 opacity-10`;
-const PictureCaption = tw.div`text-xs text-center opacity-50 mt-1`;
-const PictureWrap = tw.div`mb-4`;
-const Spacer = tw.div`h-4`;
+const H2 = (props: React.ComponentProps<'h2'>) => (
+  <h2
+    className="mb-4 mt-4 text-2xl font-black capitalize sm:text-3xl"
+    {...props}
+  />
+);
+const H3 = (props: React.ComponentProps<'h3'>) => (
+  <h3
+    className="mb-4 mt-4 text-2xl font-black capitalize sm:text-2xl"
+    {...props}
+  />
+);
+const H4 = (props: React.ComponentProps<'h4'>) => (
+  <h4
+    className="mb-3 mt-3 text-xl font-black capitalize sm:text-2xl"
+    {...props}
+  />
+);
+const Divider = (props: React.ComponentProps<'div'>) => (
+  <div className="h-px bg-white mx-4 my-4 opacity-10" {...props} />
+);
+const PictureCaption = (props: React.ComponentProps<'div'>) => (
+  <div className="text-xs text-center opacity-50 mt-1" {...props} />
+);
+const PictureWrap = (props: React.ComponentProps<'div'>) => (
+  <div className="mb-4" {...props} />
+);
+const Spacer = (props: React.ComponentProps<'div'>) => (
+  <div className="h-4" {...props} />
+);
 
 const A = ({ href = '', ...props }) => {
   if (href.match(/http|https/)) {

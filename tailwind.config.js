@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const colors = require('tailwindcss/colors');
 const plugin = require('tailwindcss/plugin');
 
 const hoverPlugin = plugin(function ({ addVariant, e, postcss }) {
@@ -19,12 +18,10 @@ const hoverPlugin = plugin(function ({ addVariant, e, postcss }) {
 });
 
 module.exports = {
-  mode: 'jit',
-  purge: [
-    './pages/**/*.{jsx,tsx}',
-    './components/**/*.{jsx,tsx}',
-    './content/**/*.{mdx}',
-    './posts/**/*.{mdx}',
+  content: [
+    './pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx}',
+    './content/**/*.mdx',
   ],
   darkMode: 'class',
   theme: {
@@ -54,7 +51,6 @@ module.exports = {
     },
     extend: {
       colors: {
-        ...colors,
         purple: '#3f3cbb',
         unhovered: '#d1e8f3ed',
         'unhovered-dark': '#2b4555',
@@ -91,9 +87,6 @@ module.exports = {
         'zoom-150': '150% 150%',
       },
     },
-  },
-  variants: {
-    extend: {},
   },
   plugins: [hoverPlugin],
 };

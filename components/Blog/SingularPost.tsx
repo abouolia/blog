@@ -1,7 +1,5 @@
 import React from 'react';
-import tw from 'twin.macro';
 import { formateDateFull } from '../../utils/formatDate';
-import { ArticleRoot } from './ArticleRoot';
 import { PostTag, PostTags } from './Tags';
 
 interface ISinglePostProps {
@@ -20,10 +18,12 @@ export function SingularPost({
   updatedAt,
 }: ISinglePostProps) {
   return (
-    <SingularPostRoot>
-      <SingularPostHeader>
-        <SingularPostTitle>{title}</SingularPostTitle>
-        <SingularPostDate>
+    <article className="max-w-[85ch] mx-auto pt-12 pb-28 px-5">
+      <div className="pb-8">
+        <h1 className="mb-1 text-3xl font-black capitalize md:text-4xl">
+          {title}
+        </h1>
+        <div className="flex flex-col pt-4 text-sm font-thin uppercase text-stone-500 dark:text-stone-400 tracking-widest">
           {publishedAt && (
             <time dateTime="2022-04-21">
               Published on {formateDateFull(publishedAt)}
@@ -34,48 +34,18 @@ export function SingularPost({
               Published on {formateDateFull(updatedAt)}
             </time>
           )}
-        </SingularPostDate>
+        </div>
 
         {tags && (
-          <SingularTags>
+          <PostTags className="mt-5">
             {tags.map((tag) => (
-              <PostTag>#{tag}</PostTag>
+              <PostTag key={tag}>#{tag}</PostTag>
             ))}
-          </SingularTags>
+          </PostTags>
         )}
-      </SingularPostHeader>
+      </div>
 
-      <SingularPostContent>{content}</SingularPostContent>
-    </SingularPostRoot>
+      <div>{content}</div>
+    </article>
   );
 }
-
-const SingularPostRoot = tw(ArticleRoot)`
-  max-w-[85ch]
-  mx-auto
-  pt-12
-  pb-28
-  px-5
-`;
-const SingularPostHeader = tw.div`pb-8`;
-const SingularPostTitle = tw.h1`
-  mb-1
-  text-3xl
-  font-black
-  capitalize
-  md:text-4xl
-  
-`;
-const SingularPostContent = tw.div``;
-const SingularPostDate = tw.div`
-  flex
-  flex-col
-  pt-4
-  text-sm
-  font-thin
-  uppercase
-  text-warmGray-500
-  dark:text-warmGray-400
-  tracking-widest
-`;
-const SingularTags = tw(PostTags)`mt-5`
