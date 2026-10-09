@@ -18,7 +18,7 @@ export function SingularPost({
   updatedAt,
 }: ISinglePostProps) {
   return (
-    <article className="max-w-[85ch] mx-auto pt-12 pb-28 px-5">
+    <article className="max-w-[85ch] mx-auto pt-12 pb-28 md:px-5 px-3.5">
       <div className="pb-8">
         <h1 className="mb-1 text-3xl font-black capitalize md:text-4xl">
           {title}

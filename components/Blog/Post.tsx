@@ -10,7 +10,7 @@ import { PostTag, PostTags } from './Tags';
  */
 export function PostsList({ children }) {
   return (
-    <div className="w-full sm:max-w-[75ch] m-auto px-5 py-16 flex flex-col">
+    <div className="w-full sm:max-w-[75ch] m-auto md:px-5 px-4 md:py-16 py-12 flex flex-col">
       {children}
     </div>
   );
@@ -29,9 +29,9 @@ interface PostProps {
  */
 export function Post({ title, date, slug, tags }: PostProps) {
   return (
-    <article className="py-8 border-b dark:border-white dark:border-opacity-5 border-black border-opacity-5">
-      <div className="flex items-center p-1 capitalize transition-colors duration-200 rounded outline-none">
-        <div className="text-sm mr-6 min-w-[60px] opacity-90">
+    <article className="md:py-8 py-6 border-b dark:border-white dark:border-opacity-5 border-black border-opacity-5">
+      <div className="flex md:items-center md:p-1 capitalize transition-colors duration-200 rounded outline-none md:flex-row flex-col">
+        <div className="text-sm mr-6 md:min-w-[60px] md:mb-0 mb-1 md:opacity-90 opacity-50">
           {formateDatePreview(date)}
         </div>
 
