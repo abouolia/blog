@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { config } from '../../config';
-import { getCurrentTimeFormat } from '../../utils/formatDate';
 import { NavbarThemeSwitch } from './NavbarThemeSwitch';
 
 /**
@@ -39,11 +38,9 @@ export function Navbar() {
 }
 
 function NavbarTime() {
-  const time = getCurrentTimeFormat();
-
   return (
     <div className="pl-[12px] flex">
-      <span className="m-auto">{time}, Tripoli, LY</span>
+      <span className="m-auto">Ahmed Bouhuolia <span className="opacity-60">/ahmad/</span></span>
     </div>
   );
 }
