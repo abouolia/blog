@@ -50,10 +50,15 @@ function NavbarTime() {
 function NavbarAvatar() {
   return (
     <div className="flex">
+      {/* A plain <img> keeps next/image out of the shared bundle; the avatar is
+          already pre-optimized to a 96px WebP. */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         className="md:h-[40px] md:w-[40px] h-[20px] w-[20px] mt-auto mb-auto rounded-[3px]"
         src={config.navbarAvatar}
         alt="avatar"
+        width={40}
+        height={40}
       />
     </div>
   );

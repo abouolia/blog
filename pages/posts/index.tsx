@@ -1,4 +1,5 @@
-import { Post, PostsList, SEO } from '../../components';
+import { Post, PostsList } from '../../components/Blog/Post';
+import { SEO } from '../../components/SEO';
 import { config } from '../../config';
 import { getAllPosts } from '../../utils/posts';
 import { blogListJsonLd } from '../../utils/seo';

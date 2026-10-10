@@ -2,7 +2,9 @@ import { useRouter } from 'next/router';
 import ErrorPage from 'next/error';
 import { serialize } from 'next-mdx-remote/serialize';
 import { getPostBySlug, getAllPosts } from '../../utils/posts';
-import { MDXContent, SEO, SingularPost } from '../../components';
+import { MDXContent } from '../../components/MDXContent';
+import { SEO } from '../../components/SEO';
+import { SingularPost } from '../../components/Blog/SingularPost';
 import { config } from '../../config';
 import { blogPostingJsonLd, breadcrumbJsonLd, excerptFromMdx } from '../../utils/seo';
 
@@ -14,8 +16,7 @@ export default function Post({ post, source }) {
     return <ErrorPage statusCode={404} />;
   }
 
-  const description =
-    post.description || excerptFromMdx(post.content) || config.siteDescription;
+  const description = post.description || config.siteDescription;
 
   return (
     <>
@@ -59,12 +60,21 @@ export async function getStaticProps({ params }) {
     'tags',
     'content',
   ]);
-  const source = await serialize(post?.content || '', { blockJS: false });
+  // Compute the description here so the raw MDX content doesn't have to be
+  // shipped to the client inside the page props.
+  const description =
+    post.description ||
+    excerptFromMdx(post.content || '') ||
+    config.siteDescription;
+
+  const { content, ...postMeta } = post;
+  const source = await serialize(content || '', { blockJS: false });
 
   return {
     props: {
       post: {
-        ...post,
+        ...postMeta,
+        description,
       },
       source,
     },

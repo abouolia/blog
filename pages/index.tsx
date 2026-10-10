@@ -2,7 +2,8 @@ import { serialize } from 'next-mdx-remote/serialize';
 import { config } from '../config';
 import { getHomePage } from '../utils/posts';
 import { personJsonLd } from '../utils/seo';
-import { MDXContent, SEO } from '../components';
+import { MDXContent } from '../components/MDXContent';
+import { SEO } from '../components/SEO';
 
 const activeRepositories = [
   {
