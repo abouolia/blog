@@ -109,6 +109,8 @@
   kbd,
   samp,
   pre {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
     padding: 2px 5px;
     border-radius: 3px;
     @apply bg-[#42828e14] dark:bg-[#2a2e31];
@@ -165,6 +167,11 @@
    - heading margins/size from the `:is(h1..h6)` block
    - `mx-1` on inline code
    - `::before/::after` backticks on inline code */
+
+/* First element of the post body should not push the content down. */
+article > div > :first-child {
+  margin-top: 0;
+}
 
 article img {
   @apply w-full mx-auto;
