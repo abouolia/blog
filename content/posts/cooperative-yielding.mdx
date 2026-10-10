@@ -14,7 +14,7 @@ When JavaScript performs a large amount of synchronous work, all of these activi
 
 the examples of long tasks is a lot, doing sorting or filter intensive data table, generating thumbnails out of a video, processing a video or audio etc.
 
-In most cases you can shift these kind of tasks to Web Worker to be in separate thread to keep the main thread responsive and in some use cases, shifting it to a Web Worker won't be applicable or requires a lot of engineering.
+In most cases you can shift these kind of tasks to Web Worker to be in separate thread to keep the main thread responsive, in some use cases, shifting it to a Web Worker is inapplicable.
 
 One technique for avoiding this problem is cooperative yielding: instead of monopolizing the main thread until a task is completely finished, your code periodically gives the browser an opportunity to do other work.
 
