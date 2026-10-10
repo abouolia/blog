@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { config } from '../../config';
+import { NavbarRssIcon } from './NavbarRssIcon';
 import { NavbarThemeSwitch } from './NavbarThemeSwitch';
 
 /**
@@ -24,11 +25,12 @@ export function Navbar() {
             <Link href="/posts" passHref>
               <a className="capitalize opacity-50">Posts</a>
             </Link>
-            <Link href="http://github.com/abouolia" passHref>
+            <Link href="https://github.com/abouolia" passHref>
               <a className="opacity-75" target="_blank" rel="noreferrer">
                 Github
               </a>
             </Link>
+            <NavbarRssIcon />
             <NavbarThemeSwitch />
           </div>
         </nav>

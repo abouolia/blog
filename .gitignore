@@ -2,3 +2,9 @@
 yarn-error.log
 /.next
 tsconfig.tsbuildinfo
+
+# Generated on build (next-sitemap and scripts/generate-rss.mjs)
+/public/sitemap.xml
+/public/sitemap-*.xml
+/public/robots.txt
+/public/rss.xml

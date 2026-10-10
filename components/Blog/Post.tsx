@@ -37,9 +37,9 @@ export function Post({ title, date, slug, tags }: PostProps) {
 
         <div>
           <PostLink slug={slug}>
-            <h3 className={`${highlightText} text-[20px] pl-2 pr-2`}>
+            <h2 className={`${highlightText} text-[20px] pl-2 pr-2`}>
               {title}
-            </h3>
+            </h2>
           </PostLink>
           {tags && (
             <PostTags>

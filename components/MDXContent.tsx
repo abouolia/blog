@@ -65,13 +65,14 @@ const GistCode = ({ id }) => {
 
 interface PictureProps {
   src: string;
-  alt: string;
+  alt?: string;
 
   caption?: string;
   width?: number | string;
   height?: number | string;
   fullWidth?: boolean;
   layout?: ImageProps['layout'];
+  priority?: boolean;
 }
 
 const Picture = ({
@@ -81,7 +82,8 @@ const Picture = ({
   width = 775,
   height = 300,
   fullWidth = true,
-  layout = 'intrinsic'
+  layout = 'intrinsic',
+  priority = false,
 }: PictureProps) => {
   const computedWidth = fullWidth ? Math.max(toNumber(width), 775) : width;
   const computedHeight = fullWidth ? Math.max(toNumber(height), 100) : height;
@@ -90,11 +92,12 @@ const Picture = ({
     <PictureWrap>
       <Image
         src={src}
-        alt={alt}
+        alt={alt || caption || ''}
         width={computedWidth}
         height={computedHeight}
         layout={layout}
         objectFit="cover"
+        priority={priority}
       />
       {caption && <PictureCaption>{caption}</PictureCaption>}
     </PictureWrap>
