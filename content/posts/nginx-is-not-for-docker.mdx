@@ -1,10 +1,16 @@
 ---
 title: 'NGINX proxy Is Not For Docker, Use Envoy Instead'
 publishedAt: '2024-06-21T10:35:07.322Z'
+description: "Why NGINX's one-time DNS resolution breaks Docker container networking after restarts, and how Envoy's continuous STRICT_DNS service discovery fixes it."
+image: '/images/server.png'
 tags: Nginx, Docker, Docker Network, Envoy
 ---
 
-<Picture src="/images/server.png" />
+<Picture
+  src="/images/server.png"
+  alt="NGINX reverse proxy routing between Docker containers"
+  priority
+/>
 
 Nginx has long been a popular and easy-to-go for routing an application between multiple Docker containers, like managing communication between a server-side and client-side, or routing between microservices.
 
@@ -20,6 +26,7 @@ Consequently, if an upstream container restarts and is assigned a new IP address
   fullWidth={false}
   layout="fixed"
   src="/images/docker-nginx-1.png"
+  alt="Network diagram: the service_2 container restarted and received a new IP address"
 />
 
 The `service_2` container has been restarted and a new IP address is assigned to it, the DNS resolve table in the Nginx still keeps the old resolved IPs of the two hostnames, and `service_2` becomes not reachable until the Nginx restart.
@@ -30,6 +37,7 @@ The `service_2` container has been restarted and a new IP address is assigned to
   fullWidth={false}
   layout="fixed"
   src="/images/docker-nginx-2.png"
+  alt="Diagram showing NGINX still resolving the stale IP address of service_2"
 />
 
 This issue made us look for an alternative server with better DNS resolution capabilities. We came up with [Envoy](https://www.envoyproxy.io/), which offers various DNS recovery mechanisms. [STRICT_DNS](https://www.envoyproxy.io/docs/envoy/latest/intro/arch_overview/upstream/service_discovery#strict-dns) mode resolves specified DNS targets continuously and asynchronously. eventually, We had to [migrate Bigcapital proxy](https://github.com/bigcapitalhq/bigcapital/blob/develop/docker/envoy/envoy.yaml) to Envoy to close the issue of some services becoming unreachable that many users were complaining about.

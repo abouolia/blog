@@ -4,8 +4,20 @@ import Document, { Html, Head, Main, NextScript } from 'next/document';
 export default class MyDocument extends Document {
   render() {
     return (
-      <Html>
-        <Head />
+      <Html lang="en">
+        <Head>
+          <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+          <meta
+            name="theme-color"
+            content="#fdfdfd"
+            media="(prefers-color-scheme: light)"
+          />
+          <meta
+            name="theme-color"
+            content="#0D0D10"
+            media="(prefers-color-scheme: dark)"
+          />
+        </Head>
         <body>
           <Main />
           <script

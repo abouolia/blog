@@ -3,12 +3,16 @@ import Link from 'next/link';
 
 export function NavbarRssIcon() {
   return (
-    <Link href="https://www.zhenghao.io/rss.xml">
-      <span style={{ cursor: 'pointer' }}>
+    <Link href="/rss.xml">
+      <a
+        className="opacity-75 hover:opacity-100"
+        aria-label="RSS feed"
+        title="RSS feed"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
+          width="18"
+          height="18"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -21,7 +25,7 @@ export function NavbarRssIcon() {
           <path d="M4 4a16 16 0 0 1 16 16"></path>
           <circle cx="5" cy="19" r="1"></circle>
         </svg>
-      </span>
+      </a>
     </Link>
   );
 }

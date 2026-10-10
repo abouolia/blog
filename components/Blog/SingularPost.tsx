@@ -25,13 +25,13 @@ export function SingularPost({
         </h1>
         <div className="flex flex-col pt-4 text-sm font-thin uppercase text-stone-500 dark:text-stone-400 tracking-widest">
           {publishedAt && (
-            <time dateTime="2022-04-21">
+            <time dateTime={new Date(publishedAt).toISOString()}>
               Published on {formateDateFull(publishedAt)}
             </time>
           )}
           {updatedAt && (
-            <time dateTime="2022-04-21">
-              Published on {formateDateFull(updatedAt)}
+            <time dateTime={new Date(updatedAt).toISOString()}>
+              Updated on {formateDateFull(updatedAt)}
             </time>
           )}
         </div>

@@ -11,9 +11,12 @@ export function getPostSlugs() {
 interface PostContentMeta {
   slug?: string;
   content?: string;
+  description?: string;
+  image?: string;
   publishedAt?: Date;
   updatedAt?: Date;
   title?: string;
+  tags?: string[];
 }
 interface HomepageContentMeta {
   slug?: string;

@@ -3,6 +3,7 @@ import Head from 'next/head';
 import '../public/styles/font.css';
 import '../styles/global.css';
 
+import { config } from '../config';
 import { Navbar } from '../components';
 
 function MyApp({ Component, pageProps }) {
@@ -10,7 +11,13 @@ function MyApp({ Component, pageProps }) {
     <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" type="image/x-icon" href="favicon.ico" />
+        <meta name="author" content={config.authorName} />
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title={`${config.siteTitle} RSS Feed`}
+          href={`${config.siteUrl}/rss.xml`}
+        />
       </Head>
 
       <div className="w-full h-full">
