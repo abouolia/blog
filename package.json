@@ -2,6 +2,9 @@
   "name": "ahmed.io",
   "version": "0.1.0",
   "private": true,
+  "sideEffects": [
+    "**/*.css"
+  ],
   "engines": {
     "node": "24.x"
   },
@@ -14,22 +17,15 @@
     "typecheck": "tsc --project tsconfig.json --pretty --noEmit"
   },
   "dependencies": {
-    "@mdx-js/loader": "^2.1.1",
-    "@next/mdx": "^12.1.5",
     "autoprefixer": "^10.4.13",
     "gray-matter": "^4.0.3",
     "light-date": "^1.2.0",
     "lodash.tonumber": "^4.0.3",
-    "mdx-bundler": "^9.0.0",
     "next": "^12.1.5",
     "next-mdx-remote": "^6.0.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
-    "react-gist": "^1.2.4",
-    "react-spring": "^9.4.5-beta.1",
-    "react-toggle-dark-mode": "^1.0.4",
-    "remark": "^14.0.2",
-    "remark-html": "^15.0.1"
+    "react-gist": "^1.2.4"
   },
   "devDependencies": {
     "@types/node": "^17.0.30",

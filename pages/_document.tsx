@@ -7,6 +7,13 @@ export default class MyDocument extends Document {
       <Html lang="en">
         <Head>
           <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+          <link
+            rel="preload"
+            href="/fonts/iAWriterQuattroV.woff2"
+            as="font"
+            type="font/woff2"
+            crossOrigin="anonymous"
+          />
           <meta
             name="theme-color"
             content="#fdfdfd"

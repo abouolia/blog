@@ -18,6 +18,6 @@ export const config = {
   authorName: 'Ahmed Bouhuolia',
   twitterHandle: 'bouhuolia',
   githubHandle: 'abouolia',
-  navbarAvatar: '/images/avatar.png',
+  navbarAvatar: '/images/avatar.webp',
   defaultOgImage: '/images/og-default.png',
 };

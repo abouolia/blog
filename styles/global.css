@@ -217,3 +217,54 @@ details {
   padding: 1rem;
   border: 2px solid #f2cfc2;
 }
+
+/* Theme switch (replaces the react-spring based toggle). */
+.theme-switch {
+  transition: transform 0.45s cubic-bezier(0.34, 1.2, 0.64, 1);
+}
+
+.theme-switch--dark {
+  transform: rotate(40deg);
+}
+
+.theme-switch--light {
+  transform: rotate(90deg);
+}
+
+.theme-switch__mask {
+  transition: cx 0.45s ease, cy 0.45s ease;
+}
+
+.theme-switch--dark .theme-switch__mask {
+  cx: 50%;
+  cy: 23%;
+}
+
+.theme-switch--light .theme-switch__mask {
+  cx: 100%;
+  cy: 0%;
+}
+
+.theme-switch__center {
+  transition: r 0.45s ease;
+}
+
+.theme-switch--dark .theme-switch__center {
+  r: 9px;
+}
+
+.theme-switch--light .theme-switch__center {
+  r: 5px;
+}
+
+.theme-switch__lines {
+  transition: opacity 0.45s ease;
+}
+
+.theme-switch--dark .theme-switch__lines {
+  opacity: 0;
+}
+
+.theme-switch--light .theme-switch__lines {
+  opacity: 1;
+}

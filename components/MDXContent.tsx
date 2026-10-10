@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { MDXRemote } from 'next-mdx-remote';
 import Image, { ImageProps } from 'next/image';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import toNumber from 'lodash.tonumber';
-import Gist from 'react-gist';
 import { LinkButton } from './Button';
+
+// `react-gist` is only downloaded when a gist gets close to the viewport.
+const Gist = dynamic(() => import('react-gist'), { ssr: false });
 
 const H2 = (props: React.ComponentProps<'h2'>) => (
   <h2
@@ -55,11 +58,49 @@ const A = ({ href = '', ...props }) => {
   );
 };
 
-const GistCode = ({ id }) => {
+/**
+ * Renders a GitHub gist lazily: `react-gist` and the gist iframe are only
+ * loaded once the embed is close to the viewport. Posts with many gists would
+ * otherwise fire dozens of requests to gist.github.com on page load.
+ */
+const GistCode = ({ id }: { id: string }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) {
+      return;
+    }
+
+    if (typeof IntersectionObserver === 'undefined') {
+      setIsVisible(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '600px 0px' }
+    );
+
+    observer.observe(container);
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <p>
-      <Gist id={id} />
-    </p>
+    <div ref={containerRef}>
+      {isVisible ? (
+        <Gist id={id} />
+      ) : (
+        <div className="my-4 h-40 animate-pulse rounded-sm bg-black/5 dark:bg-white/5" />
+      )}
+    </div>
   );
 };
 

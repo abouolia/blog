@@ -4,7 +4,7 @@ import '../public/styles/font.css';
 import '../styles/global.css';
 
 import { config } from '../config';
-import { Navbar } from '../components';
+import { Navbar } from '../components/Navbar';
 
 function MyApp({ Component, pageProps }) {
   return (

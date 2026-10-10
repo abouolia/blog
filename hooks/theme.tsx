@@ -7,9 +7,14 @@ export const COLOR_THEME = 'COLOR_THEME';
 /**
  * Syncs the theme with body classname.
  * @param {ColorTheme} theme
+ * @param {boolean} enabled - Skip syncing until the theme has been read on the client.
  */
-export function useSyncThemeBodyClassname(theme: ColorTheme) {
+export function useSyncThemeBodyClassname(theme: ColorTheme, enabled = true) {
   useEffect(() => {
+    if (!enabled) {
+      return;
+    }
+
     const bodyClass = document.body.classList;
 
     if (theme === 'light') {
@@ -19,17 +24,22 @@ export function useSyncThemeBodyClassname(theme: ColorTheme) {
       bodyClass.add('dark');
       bodyClass.remove('light');
     }
-  }, [theme]);
+  }, [theme, enabled]);
 }
 
 /**
  * Syncs the theme with local storage.
  * @param {ColorTheme} theme
+ * @param {boolean} enabled - Skip syncing until the theme has been read on the client.
  */
-export function useSyncThemeLocalStorage(theme: ColorTheme) {
+export function useSyncThemeLocalStorage(theme: ColorTheme, enabled = true) {
   useEffect(() => {
+    if (!enabled) {
+      return;
+    }
+
     setLocalStorage(COLOR_THEME, theme === 'dark' ? 'dark' : 'light');
-  }, [theme]);
+  }, [theme, enabled]);
 }
 
 /**
@@ -38,12 +48,4 @@ export function useSyncThemeLocalStorage(theme: ColorTheme) {
  */
 export function getCurrentTheme(): ColorTheme {
   return getLocalStorage(COLOR_THEME, 'dark');
-}
-
-/**
- * Retrieve the blog current theme.
- * @returns {ColorTheme}
- */
-export function useGetTheme(): ColorTheme {
-  return getCurrentTheme();
 }
