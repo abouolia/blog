@@ -1,0 +1,106 @@
+---
+title: 'Cooperative Yielding Long Tasks'
+publishedAt: '2026-10-10T05:35:07.322Z'
+description: "Don't monopolize the main thread. Do some work, give others a chance, then continue."
+tags: Main Thread, Performance, Browser, Long Tasks, Web Workers
+image: '/images/og-nginx.jpg'
+---
+
+> Don't monopolize the main thread. Do some work, give others a chance, then continue.
+
+JavaScript's main thread executes one task in parallar, one intensive task can block the main thread, freezing DOM updates, dropping frames and delaying user interactions.
+
+When JavaScript performs a large amount of synchronous work, all of these activities can be delayed.
+
+the examples of long tasks is a lot, doing sorting or filter intensive data table, generating thumbnails out of a video, processing a video or audio etc.
+
+In most cases you can shift these kind of tasks to Web Worker to be in separate thread to keep the main thread responsive, in some use cases, shifting it to a Web Worker is inapplicable.
+
+One technique for avoiding this problem is cooperative yielding: instead of monopolizing the main thread until a task is completely finished, your code periodically gives the browser an opportunity to do other work.
+
+#### What Does "Yield" Mean?
+
+To yield means to temporarily stop your current task and allow other work to run before continuing.
+
+Instead of doing this:
+
+```
+Main thread
+████████████████████████████████████████
+             Long JavaScript task
+```
+
+**you can break the work into smaller chunks:**
+
+```
+ Work       Yield       Work       Yield       Work
+██████        ↓         ██████       ↓          ██████
+                ↓                        ↓
+      Browser can work       Browser can work
+```
+
+### Time-Budgeted Cooperative Scheduling
+
+You can measure how long the current chunk has been running:
+
+```javascript
+async function processItems(items) {
+  let start = performance.now();
+
+  for (const item of items) {
+    processItem(item);
+
+    if (performance.now() - start >= 8) {
+      await scheduler.yield();
+      start = performance.now();
+    }
+  }
+}
+```
+
+Now your code effectively says:
+
+**I'll work for approximately 8 ms, then give the browser an opportunity to run.**
+
+This adapts to the actual cost of the work. For a 60 Hz display, a frame has approximately:
+
+`1000 / 60 ≈ 16.67 ms`
+
+That doesn't mean you have `16.67 ms` exclusively for JavaScript.
+The browser also needs time for rendering, layout, painting, input processing, and other work.
+Therefore, keeping individual chunks relatively short can significantly improve responsiveness.
+
+#### Cooperative Yielding vs. Web Workers
+
+These techniques solve different problems.
+
+Use cooperative yielding when:
+- The work needs to remain on the main thread.
+- You need access to DOM APIs.
+- You need to interact with the main-thread canvas.
+- The individual pieces of work are relatively small.
+- You mainly want to prevent UI starvation.
+
+Use a Web Worker when:
+- The computation is CPU-heavy.
+- The work can be isolated from the UI.
+- You don't need direct access to the DOM.
+- You want the computation to run on another thread.
+
+### Conclusion
+
+Cooperative yielding is a simple but powerful idea:
+
+> Don't monopolize the main thread. Do some work, give others a chance, then continue.
+
+Modern JavaScript provides: [await scheduler.yield();](https://developer.mozilla.org/en-US/docs/Web/API/Scheduler/yield)
+
+for exactly this kind of scheduling.
+
+The important thing to remember is that yielding doesn't make JavaScript parallel. It doesn't make your algorithm inherently faster, and it doesn't replace Web Workers.
+
+Its purpose is different:
+
+**It keeps the application responsive while work is still being performed on the main thread.**
+
+For interactive applications—especially canvas, timeline, visualization, and editor-style applications—this distinction can make a significant difference in perceived performance.

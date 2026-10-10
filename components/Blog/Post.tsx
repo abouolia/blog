@@ -57,7 +57,7 @@ export function Post({ title, date, slug, tags }: PostProps) {
 function PostLink({ slug, children }) {
   return (
     <Link href={`/posts/${slug}`}>
-      <a>{children}</a>
+      <a className="inline-block">{children}</a>
     </Link>
   );
 }
