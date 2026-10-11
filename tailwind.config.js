@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 const plugin = require('tailwindcss/plugin');
 
 const hoverPlugin = plugin(function ({ addVariant, e, postcss }) {
