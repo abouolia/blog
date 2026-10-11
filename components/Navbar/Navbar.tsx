@@ -13,22 +13,28 @@ export function Navbar() {
       <div className="fixed h-20 z-40 w-full flex justify-between backdrop-blur-[20px] backdrop-saturate-150 bg-white/50 dark:bg-[#0D0D1050]">
         <nav className="w-full sm:max-w-[75ch] m-auto sm:grid md:flex px-5 justify-between items-center">
           <div>
-            <Link href="/" passHref>
-              <a className="flex" title="Home" aria-label="Home">
-                <NavbarAvatar />
-                <NavbarTime />
-              </a>
+            <Link
+              href="/"
+              className="flex"
+              title="Home"
+              aria-label="Home"
+            >
+              <NavbarAvatar />
+              <NavbarTime />
             </Link>
           </div>
 
           <div className="flex items-center gap-6 mt-[5px] md:mt-0">
-            <Link href="/posts" passHref>
-              <a className="capitalize opacity-50">Posts</a>
+            <Link href="/posts" className="capitalize opacity-50">
+              Posts
             </Link>
-            <Link href="https://github.com/abouolia" passHref>
-              <a className="opacity-75" target="_blank" rel="noreferrer">
-                Github
-              </a>
+            <Link
+              href="https://github.com/abouolia"
+              className="opacity-75"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Github
             </Link>
             <NavbarRssIcon />
             <NavbarThemeSwitch />

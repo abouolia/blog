@@ -22,10 +22,13 @@ export function NavbarThemeSwitch() {
   const [theme, setTheme] = useState<ColorTheme>(DEFAULT_THEME);
   const [isMounted, setIsMounted] = useState(false);
 
+  /* eslint-disable react-hooks/set-state-in-effect -- The theme is read from
+  localStorage after mount so the server and client markup stay in sync. */
   useEffect(() => {
     setTheme(getCurrentTheme());
     setIsMounted(true);
   }, []);
+  /* eslint-enable react-hooks/set-state-in-effect */
 
   // Sync the theme with the document body classname and local storage.
   useSyncThemeBodyClassname(theme, isMounted);

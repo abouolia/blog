@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { MDXRemote } from 'next-mdx-remote';
-import Image, { ImageProps } from 'next/image';
+import Image from 'next/image';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import toNumber from 'lodash.tonumber';
-import { LinkButton } from './Button';
+import { LinkButton, highlightText } from './Button';
 
 // `react-gist` is only downloaded when a gist gets close to the viewport.
 const Gist = dynamic(() => import('react-gist'), { ssr: false });
@@ -40,11 +40,12 @@ const Spacer = (props: React.ComponentProps<'div'>) => (
   <div className="h-4" {...props} />
 );
 
-const A = ({ href = '', ...props }) => {
+const A = ({ href = '', className, ...props }) => {
   if (href.match(/http|https/)) {
     return (
       <LinkButton
         href={href}
+        className={className}
         target="_blank"
         rel="noopener noreferrer"
         {...props}
@@ -52,9 +53,11 @@ const A = ({ href = '', ...props }) => {
     );
   }
   return (
-    <Link href={href} passHref>
-      <LinkButton {...props} />
-    </Link>
+    <Link
+      href={href}
+      className={className ? `${highlightText} ${className}` : highlightText}
+      {...props}
+    />
   );
 };
 
@@ -74,6 +77,9 @@ const GistCode = ({ id }: { id: string }) => {
     }
 
     if (typeof IntersectionObserver === 'undefined') {
+      // Fallback for browsers without IntersectionObserver: render the gist
+      // immediately. The state change is intentional and runs once on mount.
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- mount-only fallback
       setIsVisible(true);
       return;
     }
@@ -112,7 +118,13 @@ interface PictureProps {
   width?: number | string;
   height?: number | string;
   fullWidth?: boolean;
-  layout?: ImageProps['layout'];
+  /**
+   * Legacy `next/image` layout kept for MDX compatibility: `intrinsic`
+   * scales the image down to the container width, `fixed` renders it at
+   * exactly the given size.
+   */
+  layout?: 'intrinsic' | 'fixed';
+  /** Preload the image when it is likely the LCP element. */
   priority?: boolean;
 }
 
@@ -126,8 +138,13 @@ const Picture = ({
   layout = 'intrinsic',
   priority = false,
 }: PictureProps) => {
-  const computedWidth = fullWidth ? Math.max(toNumber(width), 775) : width;
-  const computedHeight = fullWidth ? Math.max(toNumber(height), 100) : height;
+  const computedWidth = fullWidth
+    ? Math.max(toNumber(width), 775)
+    : toNumber(width);
+  const computedHeight = fullWidth
+    ? Math.max(toNumber(height), 100)
+    : toNumber(height);
+  const responsive = layout !== 'fixed';
 
   return (
     <PictureWrap>
@@ -136,9 +153,11 @@ const Picture = ({
         alt={alt || caption || ''}
         width={computedWidth}
         height={computedHeight}
-        layout={layout}
-        objectFit="cover"
-        priority={priority}
+        sizes={
+          responsive ? '(max-width: 815px) calc(100vw - 40px), 775px' : undefined
+        }
+        style={responsive ? { maxWidth: '100%', height: 'auto' } : undefined}
+        preload={priority}
       />
       {caption && <PictureCaption>{caption}</PictureCaption>}
     </PictureWrap>

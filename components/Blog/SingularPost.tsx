@@ -4,7 +4,7 @@ import { PostTag, PostTags } from './Tags';
 
 interface ISinglePostProps {
   title: string;
-  content: string | JSX.Element;
+  content: string | React.JSX.Element;
   tags?: string[];
   publishedAt: string;
   updatedAt?: string;

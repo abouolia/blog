@@ -17,7 +17,7 @@ function getPostLastmod(slug) {
     const { data } = matter(fs.readFileSync(file, 'utf8'));
     const lastmod = data.updatedAt || data.publishedAt;
     return lastmod ? new Date(lastmod).toISOString() : null;
-  } catch (error) {
+  } catch {
     return null;
   }
 }
