@@ -30,6 +30,12 @@ const activeRepositories = [
       'Binds Blueprint.js components with Formik for easy development.',
   },
   {
+    title: 'blueprintjs-react-table',
+    href: 'https://github.com/bigcapitalhq/blueprintjs-react-table',
+    description:
+      'A Blueprint.js-styled data table for React, built on TanStack Table.',
+  },
+  {
     title: 'use-next-context',
     href: 'https://github.com/abouolia/use-next-context',
     description: 'Performance optimized React Context API.',
